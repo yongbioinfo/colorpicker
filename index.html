@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modern Color Picker</title>
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f7f7f7;
+  }
+  .picker-container {
+    text-align: center;
+  }
+  .color-display {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: background-color 0.3s;
+  }
+  button {
+    border: none;
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  button:hover {
+    background-color: #555;
+  }
+</style>
+<script>
+function updateColor(value) {
+  var colorDisplay = document.getElementById('colorDisplay');
+  var hexValue = document.getElementById('hexValue');
+  colorDisplay.style.backgroundColor = value;
+  hexValue.textContent = value;
+}
+
+function copyToClipboard() {
+  var hexValue = document.getElementById('hexValue').textContent;
+  navigator.clipboard.writeText(hexValue).then(function() {
+    alert('Copied to clipboard: ' + hexValue);
+  }).catch(function(error) {
+    alert('Copy failed! ' + error);
+  });
+}
+</script>
+</head>
+<body>
+
+<div class="picker-container">
+  <h2>Modern Color Picker</h2>
+  <input type="color" onchange="updateColor(this.value)">
+  <div id="colorDisplay" class="color-display"></div>
+  <p>HEX Value: <span id="hexValue">#ffffff</span></p>
+  <button onclick="copyToClipboard()">Copy HEX</button>
+</div>
+
+</body>
+</html>
